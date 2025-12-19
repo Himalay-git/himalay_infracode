@@ -38,9 +38,3 @@ module "database" {
   source       = "../../module/07_sql_database"
   sql_database = var.sql_database
 }
-module "key" {
-  depends_on = [module.rgg]
-
-  source   = "../../module/08_keyvault"
-  keyvault = var.keyvault
-}
