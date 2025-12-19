@@ -8,14 +8,10 @@ variables:
 
 stages: 
 - stage: init
-  displayName: terraform install and init
+  displayName: terraform init
   jobs:
       - job: terraform
         steps:
-          - task: TerraformInstaller@1
-            displayName: terraform install
-            inputs:
-              terraformVersion: 'latest'  
           - task: TerraformTask@5
             displayName: terraform init
             inputs:
@@ -28,7 +24,7 @@ stages:
               backendAzureRmContainerName: 'blobcontainer'
               backendAzureRmKey: 'terraform.tfstate'
 - stage: scanning
-  displayName: scanning code
+  displayName: Scanning code
   dependsOn: init
   jobs:
     - job: checkov
@@ -57,7 +53,7 @@ stages:
             testResultsFiles: 'tflint-report.xml'
 
 - stage: 
-  displayName: terraform plan
+  displayName: Terraform plan
   jobs:
     - job: 
       steps:
