@@ -49,7 +49,7 @@ stages:
           continueOnError: true
           inputs:
             targetType: 'inline'
-            script: 'tflint --chdir="$(System.DefaultWorkingDirectory)" --recursive --format junit > tflint-report.xml'
+            script: 'tflint --chdir="$(System.DefaultWorkingDirectory)" --recursive --format junit | Out-File -Encoding utf8 > tflint-report.xml ;exit 0 '
         - task: PublishTestResults@2
           displayName: TFlint Publish Report
           inputs:
@@ -61,7 +61,7 @@ stages:
   jobs:
     - job: 
       steps:
-      - template: temp.yaml
+      - template: inittemplate.yaml
 
       - task: TerraformTask@5
         displayName: Terraform plan
@@ -85,7 +85,7 @@ stages:
   jobs:
     - job: 
       steps:
-        - template: temp.yaml
+        - template: inittemplate.yaml
         - task: TerraformTask@5
           displayName: Terraform apply
           inputs:
