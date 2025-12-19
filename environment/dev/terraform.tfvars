@@ -78,11 +78,3 @@ sql_database = {
     license_type = "LicenseIncluded"
   }
 }
-
-keyvault = {
-  "keyvault1" = {
-    name                = "prackeyvault"
-    location            = "centralindia"
-    resource_group_name = "tuhar"
-  }
-}
